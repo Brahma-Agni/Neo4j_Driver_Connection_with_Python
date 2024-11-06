@@ -1,0 +1,72 @@
+
+// copy this and paste in the neo4j browser
+CREATE (a1:Author {author_id: 'A001', name: 'Dr. Emily Smith', department: 'Computer Science', title: 'Professor'}),
+       (a2:Author {author_id: 'A002', name: 'Dr. James Chen', department: 'Electrical Engineering', title: 'Associate Professor'}),
+       (a3:Author {author_id: 'A003', name: 'Dr. Sarah Johnson', department: 'Mechanical Engineering', title: 'Assistant Professor'}),
+       (a4:Author {author_id: 'A004', name: 'Dr. Michael Brown', department: 'Physics', title: 'Research Scientist'}),
+       (a5:Author {author_id: 'A005', name: 'Dr. Anna White', department: 'Biology', title: 'Lecturer'}),
+       (a6:Author {author_id: 'A006', name: 'Dr. David Lee', department: 'Chemistry', title: 'Professor'}),
+       (a7:Author {author_id: 'A007', name: 'Dr. Rachel Adams', department: 'Psychology', title: 'Senior Lecturer'});
+
+// Create Paper nodes
+CREATE (p1:Paper {paper_id: 'P101', name: 'Machine Learning in Healthcare', topic: 'Machine Learning', year_of_publication: 2020}),
+       (p2:Paper {paper_id: 'P102', name: 'Advanced Signal Processing Techniques', topic: 'Signal Processing', year_of_publication: 2019}),
+       (p3:Paper {paper_id: 'P103', name: 'Robotics in Industrial Applications', topic: 'Robotics', year_of_publication: 2021}),
+       (p4:Paper {paper_id: 'P104', name: 'Quantum Computing Fundamentals', topic: 'Quantum Computing', year_of_publication: 2018}),
+       (p5:Paper {paper_id: 'P105', name: 'Genetic Sequencing Techniques', topic: 'Genetics', year_of_publication: 2022}),
+       (p6:Paper {paper_id: 'P106', name: 'New Approaches in Organic Synthesis', topic: 'Organic Chemistry', year_of_publication: 2020}),
+       (p7:Paper {paper_id: 'P107', name: 'Behavioral Analysis in Children', topic: 'Behavioral Psychology', year_of_publication: 2021});
+
+// Create Category nodes
+CREATE (c1:Category {type: 'journal'}),
+       (c2:Category {type: 'conference'}),
+       (c3:Category {type: 'book chapter'}),
+       (c4:Category {type: 'others'});
+	   
+	   
+// Match existing Author nodes
+MATCH (a1:Author {author_id: 'A001'}),
+      (a2:Author {author_id: 'A002'}),
+      (a3:Author {author_id: 'A003'}),
+      (a4:Author {author_id: 'A004'}),
+      (a5:Author {author_id: 'A005'}),
+      (a6:Author {author_id: 'A006'}),
+      (a7:Author {author_id: 'A007'})
+
+// Match existing Paper nodes
+MATCH (p1:Paper {paper_id: 'P101'}),
+      (p2:Paper {paper_id: 'P102'}),
+      (p3:Paper {paper_id: 'P103'}),
+      (p4:Paper {paper_id: 'P104'}),
+      (p5:Paper {paper_id: 'P105'}),
+      (p6:Paper {paper_id: 'P106'}),
+      (p7:Paper {paper_id: 'P107'})
+
+// Match existing Category nodes
+MATCH (c1:Category {type: 'journal'}),
+      (c2:Category {type: 'conference'}),
+      (c3:Category {type: 'book chapter'}),
+      (c4:Category {type: 'others'})
+
+// Create relationships between Authors and Papers (randomly assigned)
+MERGE (a1)-[:AUTHORED]->(p3)
+MERGE (a1)-[:AUTHORED]->(p5)
+MERGE (a2)-[:AUTHORED]->(p1)
+MERGE (a2)-[:AUTHORED]->(p6)
+MERGE (a3)-[:AUTHORED]->(p2)
+MERGE (a3)-[:AUTHORED]->(p4)
+MERGE (a4)-[:AUTHORED]->(p7)
+MERGE (a5)-[:AUTHORED]->(p1)
+MERGE (a6)-[:AUTHORED]->(p3)
+MERGE (a6)-[:AUTHORED]->(p4)
+MERGE (a7)-[:AUTHORED]->(p5)
+MERGE (a7)-[:AUTHORED]->(p6)
+
+// Create relationships between Papers and Categories (randomly assigned)
+MERGE (p1)-[:BELONGS_TO]->(c2)
+MERGE (p2)-[:BELONGS_TO]->(c1)
+MERGE (p3)-[:BELONGS_TO]->(c3)
+MERGE (p4)-[:BELONGS_TO]->(c4)
+MERGE (p5)-[:BELONGS_TO]->(c1)
+MERGE (p6)-[:BELONGS_TO]->(c2)
+MERGE (p7)-[:BELONGS_TO]->(c4);
